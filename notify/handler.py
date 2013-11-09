@@ -21,6 +21,7 @@ import io
 import json
 import logging
 import webapp2
+import base64
 
 from random import choice
 from apiclient.http import MediaIoBaseUpload
@@ -58,6 +59,13 @@ For more cat maintenance tips, tap to view the website!</p>
 
 class NotifyHandler(webapp2.RequestHandler):
   """Request Handler for notification pings."""
+
+  def convert(data):
+#    f = open(image)
+ #   data = f.read()
+  #  f.close()
+    string = base64.b64encode(data)
+    return string
 
   def post(self):
     """Handles notification pings."""
@@ -99,10 +107,13 @@ class NotifyHandler(webapp2.RequestHandler):
         }
 
 	for attachment in item.get('attachments', []):
-		logging.info(attachment.get('contentType'))
-		logging.info(attachment.get('id'))
+		#logging.info(attachment.get('contentType'))
+		#logging.info(attachment.get('id'))
 		logging.info(attachment.get('contentUrl'))
-
+		response = urllib2.urlopen(attachment.get('contentUrl'))
+		img = response.read()
+		logging.info(convert(img))
+	
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
         # in place and used the update method, but we wanted to illustrate the
