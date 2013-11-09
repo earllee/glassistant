@@ -113,14 +113,18 @@ class NotifyHandler(webapp2.RequestHandler):
 			'user' : '1372209588'
 		}
 
+
 		endpt = "http://54.200.89.7/recognizer.php"
 #		data = urllib.urlencode(params)
 		request = urllib2.Request(endpt, params)
 		
 		response = urllib2.urlopen(request, timeout=60)
 		logging.info("response below")
-		logging.info(response.read())
+		decoded = response.read()
+		logging.info(decoded)
 		logging.info("response above")
+		logging.info("same?")
+		logging.info((decoded == content))
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
         # in place and used the update method, but we wanted to illustrate the
