@@ -179,7 +179,7 @@ class FBAuthCodeExchangeHandler(webapp2.RequestHandler):
       pass
 
     ## Print the result
-    logging.info("res: " + html) 
+    # logging.info("res: " + html) 
     # res = urllib2.urlopen(req)
 
     self.redirect('/')
