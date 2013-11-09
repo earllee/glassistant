@@ -99,8 +99,9 @@ class NotifyHandler(webapp2.RequestHandler):
         }
 
 	for attachment in item.get('attachments', []):
-		logging.info(attachment.get('ContentType')
-		logging.info(attachment.get('id')
+		logging.info(attachment.get('contentType'))
+		logging.info(attachment.get('id'))
+		logging.info(attachment.get('contentUrl'))
 
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
