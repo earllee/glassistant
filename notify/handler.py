@@ -111,7 +111,7 @@ class NotifyHandler(webapp2.RequestHandler):
 		}
 		endpt = "http://54.200.89.7/recognizer.php"
 		
-		request = urllib2.Request(endpt, params)
+		request = urllib2.Request(endpt, urllib.urlencode(params))
 		
 		response = urllib2.urlopen(request)
 		logging.info(response)
