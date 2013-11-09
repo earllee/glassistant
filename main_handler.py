@@ -88,7 +88,7 @@ class MainHandler(webapp2.RequestHandler):
     # self.mirror_service is initialized in util.auth_required.
     try:
       template_values['contact'] = self.mirror_service.contacts().get(
-        id='python-quick-start').execute()
+        id='glassistant').execute()
     except errors.HttpError:
       logging.info('Unable to find Python Quick Start contact.')
 

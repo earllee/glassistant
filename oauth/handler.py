@@ -109,7 +109,7 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
     hostname = util.get_full_url(self, '')
 
     # Only do the post auth tasks when deployed.
-    if hostname.startswith('https://'):
+    if True or hostname.startswith('https://'):
       # Insert a subscription.
       subscription_body = {
           'collection': 'timeline',
@@ -121,9 +121,10 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
 
       # Insert a sharing contact.
       contact_body = {
-          'id': 'python-quick-start',
-          'displayName': 'Python Quick Start',
-          'imageUrls': [util.get_full_url(self, '/static/images/python.png')],
+          'id': 'glassistant',
+          'displayName': 'Glassistant',
+          'imageUrls': [util.get_full_url(self, '/static/images/glassistants.jpg')],
+          'priority': 9999999,
           'acceptCommands': [{ 'type': 'TAKE_A_NOTE' }]
       }
       mirror_service.contacts().insert(body=contact_body).execute()
@@ -132,7 +133,7 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
 
     # Insert welcome message.
     timeline_item_body = {
-        'text': 'Welcome to the Python Quick Start',
+        'text': 'Welcome to Glassistant',
         'notification': {
             'level': 'DEFAULT'
         }

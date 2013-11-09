@@ -17,7 +17,7 @@ limitations under the License.
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glassware Starter Project</title>
+  <title>Glassistant</title>
   <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet"
         media="screen">
   <link href="/static/bootstrap/css/bootstrap-responsive.min.css"
@@ -28,7 +28,7 @@ limitations under the License.
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">Glassware Starter Project: Python Edition</a>
+      <a class="brand" href="#">Glassistant</a>
 
       <div class="nav-collapse collapse">
         <form class="navbar-form pull-right" action="/signout" method="post">
@@ -164,9 +164,9 @@ limitations under the License.
       {% if contact %}
       <form action="/" method="post">
         <input type="hidden" name="operation" value="deleteContact">
-        <input type="hidden" name="id" value="python-quick-start">
+        <input type="hidden" name="id" value="glassistant">
         <button class="btn btn-block btn-danger" type="submit">
-          Delete Python Quick Start Contact
+          Delete Contact
         </button>
       </form>
       {% else %}
@@ -174,17 +174,17 @@ limitations under the License.
         <input type="hidden" name="operation" value="insertContact">
         <input type="hidden" name="imageUrl"
                value="/static/images/python.png">
-        <input type="hidden" name="name" value="Python Quick Start">
-        <input type="hidden" name="id" value="python-quick-start">
+        <input type="hidden" name="name" value="Glassistant">
+        <input type="hidden" name="id" value="glassistant">
         <button class="btn btn-block btn-success" type="submit">
-          Insert Python Quick Start Contact
+          Insert Contact
         </button>
       </form>
       {% endif %}
 
       <h3>Voice Commands</h3>
-      <p>The "Python Quick Start" contact also accepts the <strong>take a
-        note</strong> command. Take a note with the "Python Quick Start"
+      <p>The "Glassistant" contact also accepts the <strong>take a
+        note</strong> command. Take a note with the "Glassistant"
         contact and the cat in the server will record your note and reply
         with one of a few cat utterances.</p>
     </div>
