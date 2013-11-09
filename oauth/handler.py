@@ -146,8 +146,8 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
     mirror_service.timeline().insert(body=timeline_item_body).execute()
 
 """FACEBOOK CONFIG"""
-FACEBOOK_APP_ID = ''
-FACEBOOK_APP_SECRET = ''
+FACEBOOK_APP_ID = '755517144464680'
+FACEBOOK_APP_SECRET = '60f3a2763be6b3108359ccabcda159ea'
 
 class FBAuthCodeRequestHandler():
   def get(self):  
