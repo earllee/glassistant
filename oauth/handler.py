@@ -125,12 +125,12 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
           'userToken': userid,
           'callbackUrl': util.get_full_url(self, '/notify')
       }
-      #mirror_service.subscriptions().insert(body=subscription_body).execute()
+      mirror_service.subscriptions().insert(body=subscription_body).execute()
 
       # Insert a sharing contact.
       contact_body = {
           'id': 'glassistant',
-          'displayName': 'Glassistant',
+          'displayName': 'Glassistant2',
           'imageUrls': [util.get_full_url(self, '/static/images/glassistants.jpg')],
           'priority': 9999999,
           'acceptCommands': [{ 'type': 'TAKE_A_NOTE' }]
