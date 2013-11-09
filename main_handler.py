@@ -43,6 +43,12 @@ jinja_environment = jinja2.Environment(
 PAGINATED_HTML = """
 <article class='auto-paginate'>
 <h2 class='blue text-large'>Did you know...?</h2>
+<ul>
+<li>Earl</li>
+<li>Shenil</li>
+<li>Calvin</li>
+</ul>
+<br/>
 <p>Cats are <em class='yellow'>solar-powered.</em> The time they spend
 napping in direct sunlight is necessary to regenerate their internal
 batteries. Cats that do not receive sufficient charge may exhibit the

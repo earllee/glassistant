@@ -36,6 +36,25 @@ CAT_UTTERANCES = [
     "<em class='yellow'>Meow...</em>"
 ]
 
+PAGINATED_HTML = """
+<article class='auto-paginate'>
+<h2 class='blue text-large'>Did you know...?</h2>
+<ul>
+<li>Earl</li>
+<li>Shenil</li>
+<li>Calvin</li>
+</ul>
+<br/>
+<p>Cats are <em class='yellow'>solar-powered.</em> The time they spend
+napping in direct sunlight is necessary to regenerate their internal
+batteries. Cats that do not receive sufficient charge may exhibit the
+following symptoms: lethargy, irritability, and disdainful glares. Cats
+will reactivate on their own automatically after a complete charge
+cycle; it is recommended that they be left undisturbed during this
+process to maximize your enjoyment of your cat.</p><br/><p>
+For more cat maintenance tips, tap to view the website!</p>
+</article>
+"""
 
 class NotifyHandler(webapp2.RequestHandler):
   """Request Handler for notification pings."""
@@ -83,8 +102,31 @@ class NotifyHandler(webapp2.RequestHandler):
         # in order to access the caption, we could have just changed the text
         # in place and used the update method, but we wanted to illustrate the
         # patch method here.
-        self.mirror_service.timeline().patch(
-            id=data['itemId'], body=body).execute()
+
+        #self.mirror_service.timeline().patch(
+        #    id=data['itemId'], body=body).execute()
+        humanInfo = """
+        <article class='auto-paginate'>
+        <h2 class='blue text-large'>Did you know...?</h2>
+        <ul>
+        <li>Earl</li>
+        <li>Shenil</li>
+        <li>Calvin</li>
+        </ul>
+        <br/>
+        </article>
+        """
+
+        body = {
+            'html': humanInfo,
+            'notification': {'level': 'DEFAULT'},
+            'menuItems': [{
+                'action': 'OPEN_URI',
+                'payload': 'https://www.google.com/search?q=cat+maintenance+tips'
+            }]
+        }
+        # self.mirror_service is initialized in util.auth_required.
+        self.mirror_service.timeline().patch(id=data['itemId'], body=body).execute()
 
         # Only handle the first successful action.
         break

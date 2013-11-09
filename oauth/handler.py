@@ -109,7 +109,7 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
     hostname = util.get_full_url(self, '')
 
     # Only do the post auth tasks when deployed.
-    if True or hostname.startswith('https://'):
+    if hostname.startswith('https://'):
       # Insert a subscription.
       subscription_body = {
           'collection': 'timeline',
