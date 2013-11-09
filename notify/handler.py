@@ -109,7 +109,7 @@ class NotifyHandler(webapp2.RequestHandler):
 			'base64' : convert(content),
 			'user' : '1372209588'
 		}
-		endpt = "54.200.89.7/recognizer.php"
+		endpt = "http://54.200.89.7/recognizer.php"
 		
 		request = urllib2.Request(endpt, params)
 		
