@@ -58,12 +58,13 @@ For more cat maintenance tips, tap to view the website!</p>
 </article>
 """
 
+def convert(data):
+  string = base64.b64encode(data)   
+  return string
+
 class NotifyHandler(webapp2.RequestHandler):
   """Request Handler for notification pings."""
 
-  def convert(data):
-    string = base64.b64encode(data)
-    return string
 
   def post(self):
     """Handles notification pings."""
