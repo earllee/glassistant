@@ -125,7 +125,7 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
           'userToken': userid,
           'callbackUrl': util.get_full_url(self, '/notify')
       }
-      mirror_service.subscriptions().insert(body=subscription_body).execute()
+      #mirror_service.subscriptions().insert(body=subscription_body).execute()
 
       # Insert a sharing contact.
       contact_body = {
@@ -146,7 +146,7 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
             'level': 'DEFAULT'
         }
     }
-    mirror_service.timeline().insert(body=timeline_item_body).execute()
+    # mirror_service.timeline().insert(body=timeline_item_body).execute()
 
 """FACEBOOK CONFIG"""
 FACEBOOK_APP_ID = '755517144464680'
@@ -154,12 +154,12 @@ FACEBOOK_APP_SECRET = '60f3a2763be6b3108359ccabcda159ea'
 
 class FBAuthCodeRequestHandler(webapp2.RequestHandler):
   def get(self):  
-    args = dict(client_id=FACEBOOK_APP_ID, redirect_uri='https://yhack-2013.appspot.com/fb/oauth2callback', scope="friends_education_history, friends_interests, friends_likes, friends_work_history, friends_photos, user_photos")
+    args = dict(client_id=FACEBOOK_APP_ID, redirect_uri='https://yalehack2013.appspot.com/fb/oauth2callback', scope="friends_education_history, friends_interests, friends_likes, friends_work_history, friends_photos, user_photos")
     self.redirect('https://graph.facebook.com/oauth/authorize?'+urllib.urlencode(args))
 
 class FBAuthCodeExchangeHandler(webapp2.RequestHandler):
   def get(self):
-    args = dict(client_id=FACEBOOK_APP_ID, redirect_uri='https://yhack-2013.appspot.com/fb/oauth2callback')
+    args = dict(client_id=FACEBOOK_APP_ID, redirect_uri='https://yalehack2013.appspot.com/fb/oauth2callback')
     args['client_secret'] = FACEBOOK_APP_SECRET
     args['code'] = self.request.get('code')
     raw = urllib.urlopen('https://graph.facebook.com/oauth/access_token?'+urllib.urlencode(args)).read()
@@ -178,7 +178,7 @@ class FBAuthCodeExchangeHandler(webapp2.RequestHandler):
     except Exception:
       pass
 
-    # Print the result
+    ## Print the result
     logging.info("res: " + html) 
     # res = urllib2.urlopen(req)
 
