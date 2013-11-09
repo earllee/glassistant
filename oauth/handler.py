@@ -19,7 +19,9 @@ __author__ = 'alainv@google.com (Alain Vongsouvanh)'
 
 import logging
 import webapp2
+
 from urlparse import urlparse
+from urllib import urlencode
 
 from oauth2client.appengine import StorageByKeyName
 from oauth2client.client import flow_from_clientsecrets
@@ -27,6 +29,8 @@ from oauth2client.client import FlowExchangeError
 
 from model import Credentials
 import util
+import cgitb
+cgitb.enable()
 
 
 SCOPES = ('https://www.googleapis.com/auth/glass.timeline '
@@ -88,12 +92,13 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
 
     # Store the credentials in the data store using the userid as the key.
     # TODO: Hash the userid the same way the userToken is.
+    # TODO: Add facebook credentials
     StorageByKeyName(Credentials, userid, 'credentials').put(creds)
     logging.info('Successfully stored credentials for user: %s', userid)
     util.store_userid(self, userid)
 
     self._perform_post_auth_tasks(userid, creds)
-    self.redirect('/')
+    self.redirect('/fb/auth')
 
   def _perform_post_auth_tasks(self, userid, creds):
     """Perform commong post authorization tasks.
@@ -140,8 +145,27 @@ class OAuthCodeExchangeHandler(OAuthBaseRequestHandler):
     }
     mirror_service.timeline().insert(body=timeline_item_body).execute()
 
+"""FACEBOOK CONFIG"""
+FACEBOOK_APP_ID = ''
+FACEBOOK_APP_SECRET = ''
+
+class FBAuthCodeRequestHandler():
+  def get(self):  
+    args = dict(client_id=FACEBOOK_APP_ID, redirect_uri='/fb/oauth2callback')
+    self.redirect('https://graph.facebook.com/oauth/authorize?'+urllib.urlencode(args))
+
+class FBAuthCodeExchangeHandler():
+  def get(self):
+    args = dict(client_id=FACEBOOK_APP_ID, redirect_uri='/')
+    args['client_secret'] = FACEBOOK_APP_SECRET
+    args['code'] = self.request.get('code')
+    response = cgi.parse_qs(urllib.urlopen('https://graph.facebook.com/oauth/access_token?'+urllib.urlencode(args)).read())
+    access_token = response['access_token'][-1]
+    self.redirect('/')
 
 OAUTH_ROUTES = [
     ('/auth', OAuthCodeRequestHandler),
-    ('/oauth2callback', OAuthCodeExchangeHandler)
+    ('/oauth2callback', OAuthCodeExchangeHandler),
+    ('/fb/auth', FBAuthCodeRequestHandler),
+    ('/fb/oauth2callback', FBAuthCodeExchangeHandler)
 ]
