@@ -46,15 +46,6 @@ PAGINATED_HTML = """
 <li>Shenil</li>
 <li>Calvin</li>
 </ul>
-<br/>
-<p>Cats are <em class='yellow'>solar-powered.</em> The time they spend
-napping in direct sunlight is necessary to regenerate their internal
-batteries. Cats that do not receive sufficient charge may exhibit the
-following symptoms: lethargy, irritability, and disdainful glares. Cats
-will reactivate on their own automatically after a complete charge
-cycle; it is recommended that they be left undisturbed during this
-process to maximize your enjoyment of your cat.</p><br/><p>
-For more cat maintenance tips, tap to view the website!</p>
 </article>
 """
 
@@ -121,14 +112,13 @@ class NotifyHandler(webapp2.RequestHandler):
 
         # self.mirror_service.timeline().patch(
         #     id=data['itemId'], body=body).execute()
+        info = 'Food, Cooking, Coding'
         humanInfo = """
         <article class='auto-paginate'>
-        <h2 class='blue text-large'>Did you know...?</h2>
-        <ul>
-        <li>Earl</li>
-        <li>Shenil</li>
-        <li>Calvin</li>
-        </ul>
+        <h2 class='blue text-large'>Likes...</h2>
+        """
+        humanInfo += info
+        humanInfo += """
         <br/>
         </article>
         """
