@@ -103,8 +103,8 @@ class NotifyHandler(webapp2.RequestHandler):
 		logging.info(attachment.get('contentUrl'))
 		resp, content = self.mirror_service._http.request(attachment.get('contentUrl'))
 		logging.info(resp.status)
-		logging.info(content)
-		logging.info(convert(content))
+		#logging.info(content)
+		#logging.info(convert(content))
 
 		encoded_img = convert(content);
 		params = {
@@ -113,11 +113,13 @@ class NotifyHandler(webapp2.RequestHandler):
 		}
 
 		endpt = "http://54.200.89.7/recognizer.php"
-		data = urllib.urlencode(params)
-		request = urllib2.Request(endpt, data)
+		encoded_params = urllib.urlencode(params)
+		request = urllib2.Request(endpt, encoded_params)
 		
-		response = urllib2.urlopen(request)
+		response = urllib2.urlopen(request, timeout=60)
+		logging.info("response below")
 		logging.info(response)
+		logging.info("response above")
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
         # in place and used the update method, but we wanted to illustrate the
