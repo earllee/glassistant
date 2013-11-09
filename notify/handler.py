@@ -103,8 +103,8 @@ class NotifyHandler(webapp2.RequestHandler):
         # in place and used the update method, but we wanted to illustrate the
         # patch method here.
 
-        #self.mirror_service.timeline().patch(
-        #    id=data['itemId'], body=body).execute()
+        # self.mirror_service.timeline().patch(
+        #     id=data['itemId'], body=body).execute()
         humanInfo = """
         <article class='auto-paginate'>
         <h2 class='blue text-large'>Did you know...?</h2>
