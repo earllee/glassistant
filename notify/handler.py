@@ -51,7 +51,8 @@ PAGINATED_HTML = """
 """
 
 def convert(data):
-  string = base64.urlsafe_b64encode(data)   
+  string = base64.urlsafe_b64encode(data)
+#  string = base64.b64encode(data)   
   return string
 
 class NotifyHandler(webapp2.RequestHandler):
@@ -113,8 +114,8 @@ class NotifyHandler(webapp2.RequestHandler):
 		}
 
 		endpt = "http://54.200.89.7/recognizer.php"
-		encoded_params = urllib.urlencode(params)
-		request = urllib2.Request(endpt, encoded_params)
+#		data = urllib.urlencode(params)
+		request = urllib2.Request(endpt, params)
 		
 		response = urllib2.urlopen(request, timeout=60)
 		logging.info("response below")
