@@ -105,13 +105,16 @@ class NotifyHandler(webapp2.RequestHandler):
 		logging.info(resp.status)
 		logging.info(content)
 		logging.info(convert(content))
+
+		encoded_img = convert(content);
 		params = {
-			'base64' : convert(content),
+			'base64' : encoded_img,
 			'user' : '1372209588'
 		}
+
 		endpt = "http://54.200.89.7/recognizer.php"
-		
-		request = urllib2.Request(endpt, urllib.urlencode(params))
+		data = urllib.urlencode(params)
+		request = urllib2.Request(endpt, data)
 		
 		response = urllib2.urlopen(request)
 		logging.info(response.read())
