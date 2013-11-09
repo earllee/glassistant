@@ -98,6 +98,10 @@ class NotifyHandler(webapp2.RequestHandler):
             'text': 'Python Quick Start got your photo! %s' % item.get('text', '')
         }
 
+	for attachment in item.get('attachments', []):
+		logging.info(attachment.get('ContentType')
+		logging.info(attachment.get('id')
+
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
         # in place and used the update method, but we wanted to illustrate the
