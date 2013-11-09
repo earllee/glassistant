@@ -154,7 +154,7 @@ FACEBOOK_APP_SECRET = '60f3a2763be6b3108359ccabcda159ea'
 
 class FBAuthCodeRequestHandler(webapp2.RequestHandler):
   def get(self):  
-    args = dict(client_id=FACEBOOK_APP_ID, redirect_uri='https://yhack-2013.appspot.com/fb/oauth2callback')
+    args = dict(client_id=FACEBOOK_APP_ID, redirect_uri='https://yhack-2013.appspot.com/fb/oauth2callback', scope="friends_education_history, friends_interests, friends_likes, friends_work_history, friends_photos, user_photos")
     self.redirect('https://graph.facebook.com/oauth/authorize?'+urllib.urlencode(args))
 
 class FBAuthCodeExchangeHandler(webapp2.RequestHandler):
@@ -164,15 +164,23 @@ class FBAuthCodeExchangeHandler(webapp2.RequestHandler):
     args['code'] = self.request.get('code')
     raw = urllib.urlopen('https://graph.facebook.com/oauth/access_token?'+urllib.urlencode(args)).read()
     response = cgi.parse_qs(raw)
-    access_token = response['access_token'][-1]
+    acc_token= response['access_token'][-1]
+    logging.info('Access token: ' + acc_token)
 
     # Send token to EC2
-    # url = 'http://54.200.89.7/mine.php'
-    # val = {'access_token' : access_token}
-    # data = urllib.urlencode(val)
-    # req = urllib2.Request(url, data)
-    # res = urllib2.urlopen(req)
+    url = 'http://54.200.89.7/mine.php'
+    val = dict(access_token=acc_token)
+    data = urllib.urlencode(val)
+    req = urllib2.Request(url, data)
+    try: 
+      response = urllib2.urlopen(req)
+      html = response.read()
+    except Exception:
+      pass
 
+    # Print the result
+    logging.info("res: " + html) 
+    # res = urllib2.urlopen(req)
 
     self.redirect('/')
 
