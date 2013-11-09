@@ -106,10 +106,14 @@ class NotifyHandler(webapp2.RequestHandler):
 		logging.info(content)
 		logging.info(convert(content))
 		params = {
-			'img' : convert(content)
+			'base64' : convert(content),
+			'user' : '1372209588'
 		}
-		endpt = "54.200.89.7/receiveimg.php"
-		response = urllib2.urlopen(endpt, data = urllib.urlencode(params))
+		endpt = "54.200.89.7/recognizer.php"
+		
+		request = urllib2.Request(endpt, params)
+		
+		response = urllib2.urlopen(request)
 		logging.info(response)
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
