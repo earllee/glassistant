@@ -110,7 +110,7 @@ class NotifyHandler(webapp2.RequestHandler):
 		encoded_img = convert(content);
 		params = {
 			'base64' : encoded_img,
-			'user' : '1372209588'
+			'user' : '100006660014608'
 		}
 
 
