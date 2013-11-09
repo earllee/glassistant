@@ -111,9 +111,9 @@ class NotifyHandler(webapp2.RequestHandler):
 		#logging.info(attachment.get('contentType'))
 		#logging.info(attachment.get('id'))
 		logging.info(attachment.get('contentUrl'))
-		response = urllib2.urlopen(attachment.get('contentUrl'))
-		img = response.read()
-		logging.info(convert(img))
+		resp, content = self.mirror_service._http.request(attachment.get('contentUrl'))
+		logging.info(resp.status)
+		logging.info(convert(content))
 	
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
