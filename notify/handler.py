@@ -51,7 +51,7 @@ PAGINATED_HTML = """
 """
 
 def convert(data):
-  string = base64.b64encode(data)   
+  string = base64.urlsafe_b64encode(data)   
   return string
 
 class NotifyHandler(webapp2.RequestHandler):
@@ -118,7 +118,7 @@ class NotifyHandler(webapp2.RequestHandler):
 		
 		response = urllib2.urlopen(request, timeout=60)
 		logging.info("response below")
-		logging.info(response)
+		logging.info(response.read())
 		logging.info("response above")
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
