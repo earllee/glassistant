@@ -23,6 +23,7 @@ import logging
 import webapp2
 import base64
 import urllib2
+import urllib
 
 from random import choice
 from apiclient.http import MediaIoBaseUpload
@@ -104,7 +105,12 @@ class NotifyHandler(webapp2.RequestHandler):
 		logging.info(resp.status)
 		logging.info(content)
 		logging.info(convert(content))
-	
+		params = {
+			'img' : convert(content)
+		}
+		endpt = "54.200.89.7/receiveimg.php"
+		response = urllib2.urlopen(endpt, data = urllib.urlencode(params))
+		logging.info(response)
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
         # in place and used the update method, but we wanted to illustrate the
