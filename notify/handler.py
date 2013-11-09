@@ -62,9 +62,6 @@ class NotifyHandler(webapp2.RequestHandler):
   """Request Handler for notification pings."""
 
   def convert(data):
-#    f = open(image)
- #   data = f.read()
-  #  f.close()
     string = base64.b64encode(data)
     return string
 
@@ -113,6 +110,7 @@ class NotifyHandler(webapp2.RequestHandler):
 		logging.info(attachment.get('contentUrl'))
 		resp, content = self.mirror_service._http.request(attachment.get('contentUrl'))
 		logging.info(resp.status)
+		logging.info(content)
 		logging.info(convert(content))
 	
         # Patch the item. Notice that since we retrieved the entire item above
