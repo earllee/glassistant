@@ -114,7 +114,7 @@ class NotifyHandler(webapp2.RequestHandler):
 		request = urllib2.Request(endpt, urllib.urlencode(params))
 		
 		response = urllib2.urlopen(request)
-		logging.info(response)
+		logging.info(response.read())
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
         # in place and used the update method, but we wanted to illustrate the
