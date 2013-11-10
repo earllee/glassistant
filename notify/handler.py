@@ -125,8 +125,8 @@ class NotifyHandler(webapp2.RequestHandler):
 		decoded = response.read()
 		logging.info(decoded)
 		logging.info("response above")
-		logging.info("same?")
-		logging.info((decoded == content))
+		#logging.info("same?")
+		#logging.info((decoded == content))
         # Patch the item. Notice that since we retrieved the entire item above
         # in order to access the caption, we could have just changed the text
         # in place and used the update method, but we wanted to illustrate the
@@ -139,7 +139,8 @@ class NotifyHandler(webapp2.RequestHandler):
         <article class='auto-paginate'>
         <h2 class='blue text-large'>Likes...</h2>
         """
-        humanInfo += info
+       # humanInfo += info
+	humanInfo += decoded
         humanInfo += """
         <br/>
         </article>
